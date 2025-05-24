@@ -10,22 +10,21 @@ class Fridge:
 
     def set_status(self, st):
 
-        if st == 1:
-            if self.open:
-                return "Уже открыт!"
-            self.open = True
-            return "Открыт"
-            
-        elif st == 2:
-            if not self.open:
-                return "Уже закрыт!"
-            self.open = False
-            return "Закрыт"
-        
-        elif st == 0:
-            return "Завершение программы"
-        else:
-            return ""
+        match st:
+            case 1:
+                if self.open:
+                    return "Уже открыт!"
+                self.open = True
+                return "Открыт"
+            case 2:
+                if not self.open:
+                    return "Уже закрыт!"
+                self.open = False
+                return "Закрыт"
+            case 3:
+                return "Завершение программы"
+            case _:
+                return ""
         
     def add_list_products(self, pr=None, count=1):
 
