@@ -8,7 +8,7 @@ class Fridge:
         self.min_temp = -4
         self.max_temp = 8
 
-    def status(self, st):
+    def set_status(self, st):
 
         if st == 1:
             if self.open:
@@ -59,7 +59,7 @@ class Fridge:
             return f"Продукт {pr} полностью удален"
         return f"Удалено {count} {pr}, осталось: {self.products[pr]}"
     
-    def temperature (self, temps):
+    def set_temperature (self, temps):
 
         if temps < self.min_temp:
             return f"Температура не может быть ниже {self.min_temp}°C"
