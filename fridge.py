@@ -21,10 +21,9 @@ class Fridge:
                     return "Уже закрыт!"
                 self.open = False
                 return "Закрыт"
-            case 3:
+            case 0:
                 return "Завершение программы"
-            case _:
-                return ""
+            
         
     def add_list_products(self, pr=None, count=1):
 
