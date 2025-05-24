@@ -28,18 +28,17 @@ class Fridge:
         
     def add_list_products(self, pr=None, count=1):
 
-        if self.open:
-            if pr is not None:
-                if pr in self.products:
-                    self.products[pr] += count
-                else:
-                    self.products[pr] = count
-                return f"Добавлен продукт: {pr} (количество: {self.products[pr]})" 
+        if pr in self.products:
+            self.products[pr] += count
+        else:
+            self.products[pr] = count
+        return f"Добавлен продукт: {pr} (количество: {self.products[pr]})" 
 
-            else:
-                if not self.products:
-                    return "Нет продуктов"
-                return "\n".join(f"{k}: {v}" for k, v in self.products.items())
+    def get_list_products(self):
+
+        if not self.products:
+            return "Нет продуктов"
+        return "\n".join(f"{k}: {v}" for k, v in self.products.items())
             
     def del_products(self, pr, count=1):
 
