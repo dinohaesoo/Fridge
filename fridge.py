@@ -1,3 +1,5 @@
+from error import TempError
+
 class Fridge: 
 
     def __init__(self):
@@ -23,7 +25,8 @@ class Fridge:
                 return "Закрыт"
             case 0:
                 return "Завершение программы"
-            
+            case _:
+                return ""
         
     def add_list_products(self, pr=None, count=1):
 
@@ -57,12 +60,8 @@ class Fridge:
         return f"Удалено {count} {pr}, осталось: {self.products[pr]}"
     
     def set_temperature (self, temps):
-
-        if temps < self.min_temp:
-            return f"Температура не может быть ниже {self.min_temp}°C"
-        elif temps > self.max_temp:
-            return f"Температура не может быть выше {self.max_temp}°C"
-        
+        if temps > self.max_temp or temps < self.min_temp:
+            raise TempError
         self.temp = temps
         return f"Температура установлена: {self.temp}°C"
     
