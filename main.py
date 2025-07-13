@@ -30,34 +30,44 @@ if __name__ == "__main__":
             try:
                 if my_fridge.open:
                     try:
-                        action = int(input("1 - добавить продукт, 2 - показать содержимое, 3 - удалить продукт: "))
+                        action = int(input("1 - добавить на полку, 2 - показать содержимое полки, 3 - удалить продукт с полки: "))
 
                         if not (1 <= action <= 3):
                             raise CommandError
 
                         if action == 1:
-                            pr = input("Введите название продукта: ")
-
-                            if not pr:
-                                raise ValueError   
-                            print(my_fridge.add_list_products(pr))
+                            try:
+                                shelf = int(input("Номер полки (0-2): "))
+                                if shelf < 0:
+                                    raise ShelfError
+                                product = input("Название продукта: ")
+                                cnt = int(input("Количество: "))
+                                if cnt < 0:
+                                    raise ProductError
+                                print(my_fridge.add_products_shelf(shelf, product, cnt))
+                            except ProductError:
+                                logging.error("Количество не может быть отрицательным")
+                            except ValueError:
+                                logging.error("Неверный формат ввода")
+                            except ShelfError:
+                                logging.error("Неверный номер полки")
 
                         elif action == 2:
-                            print(my_fridge.get_list_products())
+                            try:
+                                shelf = int(input("Номер полки (0-2): "))
+                                print(my_fridge.get_products_shelf(shelf))
+                            except ShelfError:
+                                logging.error("Неверный номер полки")
+
 
                         elif action == 3:
-                            pr = input("Введите название продукта для удаления: ")
-
-                            if not pr:
-                                raise ValueError
-                            
                             try:
-                                count = int(input("Введите количество для удаления: "))
-
-                                if count <= 0:
-                                    raise ValueError
-                                
-                                if count > my_fridge.products[pr]:
+                                shelf = int(input("Номер полки (0-2): "))
+                                if shelf < 0:
+                                    raise ShelfError
+                                product = input("Название продукта: ")
+                                cnt = int(input("Количество: "))
+                                if cnt < 0:
                                     raise ProductError
                                 print(my_fridge.del_products_shelf(shelf, product, cnt))
                             except ProductError:
